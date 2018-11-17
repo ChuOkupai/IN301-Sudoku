@@ -15,12 +15,13 @@
 
 int main(int argc, char **argv)
 {
-	if (argc < 3)
+	if (argc < 2)
 		exit(1);
 	SUDOKU S;
 	S = lire_fichier(argv[1]);
-	initialiser_fenetre_graphique();
-	sudoku_afficher(S);
-	terminer_fenetre_graphique();
+		printf("S.save=%d\n", S.save);
+	//initialiser_fenetre_graphique();
+	//sudoku_afficher(S);
+	//terminer_fenetre_graphique();
 	exit(0);
 }
