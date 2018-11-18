@@ -30,8 +30,7 @@ lire_ecrire.o: lire_ecrire.c lire_ecrire.h gestion_sudoku.h
 
 # Création de l'archive (rendu)
 zip:
-	rm -rf $(NOM)
-	rm -rf $(NOM).zip
+	rm -rf $(NOM) $(NOM).zip
 	mkdir $(NOM)
 	cp Makefile $(NOM)
 	cp *.h *.c $(NOM)
