@@ -26,13 +26,6 @@ void	sudoku_afficher_pb(int i, int j)
 
 void	sudoku_afficher_val(SUDOKU S)
 {
-	sudoku_afficher_pb(0, 0);
-	sudoku_afficher_pb(0, 8);
-	sudoku_afficher_pb(1, 0);
-	sudoku_afficher_pb(2, 0);
-	sudoku_afficher_pb(4, 4);
-	sudoku_afficher_pb(8, 0);
-	sudoku_afficher_pb(8, 8);
 	POINT	P;
 	COULEUR	C;
 	char	buf[2];
@@ -48,7 +41,8 @@ void	sudoku_afficher_val(SUDOKU S)
 			travail = (S.val[i][j] < 10) ? 1 : 0;
 			C = (travail) ? COUL_VAL_TRAVAIL : COUL_VAL_DEPART;
 			buf[0] = (travail) ? S.val[i][j] + 48 : S.val[i][j];
-			aff_pol_centre(buf, TAILLE_POLICE, P, C);
+			if (buf[0] != '0')
+				aff_pol_centre(buf, TAILLE_POLICE, P, C);
 			P.x += TAILLE_CASE;
 		}
 		P.y += TAILLE_CASE;
@@ -81,7 +75,7 @@ void	sudoku_afficher(SUDOKU S)
 		draw_fill_rectangle(P1, P2, COUL_TRAIT); // Verticaux
 		draw_fill_rectangle(P3, P4, COUL_TRAIT); // Horizontaux
 		P1.x += (LARGEUR - LARGEUR_TRAIT) / 3;
-		if (i < 4)
+		if (i < 3)
 		{
 			for (j = 0; j < 2; j++)
 			{
@@ -96,4 +90,7 @@ void	sudoku_afficher(SUDOKU S)
 			P5.x = P1.x + TAILLE_CASE + (LARGEUR_TRAIT >> 1);
 		}
 	}
+	P1.x = TAILLE_CASE / 8;
+	P1.y = HAUTEUR - P1.x;
+	aff_pol(S.nom, TAILLE_POLICE, P1, COUL_TITRE);
 }

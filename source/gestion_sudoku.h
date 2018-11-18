@@ -5,7 +5,8 @@
 typedef struct sudoku
 {
 	char	**val; // Stocke les valeurs
-	int	save;      // Numéro de sauvegarde du fichier actuel
+	char	*nom;  // Nom du fichier
+	int		save;  // Numéro de sauvegarde du fichier actuel
 }	SUDOKU;
 
 // Alloue la mémoire à un sudoku
