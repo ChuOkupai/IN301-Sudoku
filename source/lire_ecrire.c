@@ -28,7 +28,7 @@ SUDOKU	lire_fichier(char *nom)
 			travail = 1;
 		else if (c >= '0' && c <= '9')
 		{
-			S.val[i][j] = (travail) ? c - 48: c;
+			S.val[i][j] = (travail) ? c ^ 48: c;
 			if (travail)
 				travail = 0;
 			j++;
