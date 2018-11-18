@@ -20,8 +20,10 @@ int main(int argc, char **argv)
 	SUDOKU S;
 	S = lire_fichier(argv[1]);
 		printf("S.save=%d\n", S.save);
-	//initialiser_fenetre_graphique();
-	//sudoku_afficher(S);
-	//terminer_fenetre_graphique();
+	initialiser_fenetre_graphique();
+	sudoku_afficher(S);
+	affiche_all();
+	//wait_clic();
+	terminer_fenetre_graphique();
 	exit(0);
 }

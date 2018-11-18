@@ -5,7 +5,7 @@ afficher.h
 # 2. La définition des constantes pour essentiellement l'affichage
 constantes.h
 
-# 3. La définition du type SUDOKU et les fonctions de manupulation de cetype
+# 3. La définition du type SUDOKU et les fonctions de manipulation de ce type
 gestion_sudoku.c
 gestion_sudoku.h
 
