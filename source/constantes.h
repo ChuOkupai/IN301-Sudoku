@@ -10,10 +10,10 @@
 
 // Les différentes couleurs
 #define COUL_TITRE       0x7D75FF // Couleur du titre
-#define COUL_FOND        0xE9BC89 // Couleur de fond d'une case
-#define COUL_FOND_PB     0xFF2200 // Couleur de fond d'un case qui ne peut plus prendre aucune valeur
+#define COUL_FOND        0xFFE2BB // Couleur de fond d'une case
+#define COUL_FOND_PB     0xD41C00 // Couleur de fond d'un case qui ne peut plus prendre aucune valeur
 #define COUL_TRAIT       0x000000 // Couleur des traits de séparation
-#define COUL_VAL_DEPART  0x000042 // Couleur de la police des valeurs de départ
-#define COUL_VAL_TRAVAIL 0xBFBFBF // Couleur de la police des valeurs de travail
+#define COUL_VAL_DEPART  0x424242 // Couleur de la police des valeurs de départ
+#define COUL_VAL_TRAVAIL 0xE28D44 // Couleur de la police des valeurs de travail
 
 #endif /* constantes.h */

@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 		exit(1);
 	SUDOKU S;
 	S = lire_fichier(argv[1]);
-		printf("S.save=%d\n", S.save);
+	printf("S.save=%d\n", S.save);
 	initialiser_fenetre_graphique();
 	sudoku_afficher(S);
 	affiche_all();

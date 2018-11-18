@@ -13,7 +13,7 @@ void	terminer_fenetre_graphique()
 	wait_escape();
 }
 
-void	sudoku_afficher_pb(int i, int j, COULEUR C)
+void	sudoku_afficher_pb(int i, int j)
 {
 	POINT	P1, P2;
 	
@@ -21,7 +21,38 @@ void	sudoku_afficher_pb(int i, int j, COULEUR C)
 	P1.y = j * TAILLE_CASE;
 	P2.x = P1.x + TAILLE_CASE;
 	P2.y = P1.y + TAILLE_CASE;
-	draw_fill_rectangle(P1, P2, C);
+	draw_fill_rectangle(P1, P2, COUL_FOND_PB);
+}
+
+void	sudoku_afficher_val(SUDOKU S)
+{
+	sudoku_afficher_pb(0, 0);
+	sudoku_afficher_pb(0, 8);
+	sudoku_afficher_pb(1, 0);
+	sudoku_afficher_pb(2, 0);
+	sudoku_afficher_pb(4, 4);
+	sudoku_afficher_pb(8, 0);
+	sudoku_afficher_pb(8, 8);
+	POINT	P;
+	COULEUR	C;
+	char	buf[2];
+	int		travail;
+	
+	P.y = TAILLE_CASE >> 1;
+	buf[1] = '\0';
+	for (int i = 0; i < 9; i++)
+	{
+		P.x = TAILLE_CASE >> 1;
+		for (int j = 0; j < 9; j++)
+		{
+			travail = (S.val[i][j] < 10) ? 1 : 0;
+			C = (travail) ? COUL_VAL_TRAVAIL : COUL_VAL_DEPART;
+			buf[0] = (travail) ? S.val[i][j] + 48 : S.val[i][j];
+			aff_pol_centre(buf, TAILLE_POLICE, P, C);
+			P.x += TAILLE_CASE;
+		}
+		P.y += TAILLE_CASE;
+	}
 }
 
 void	sudoku_afficher(SUDOKU S)
@@ -30,13 +61,7 @@ void	sudoku_afficher(SUDOKU S)
 	int		i, j;
 	
 	fill_screen(COUL_FOND);
-	sudoku_afficher_pb(0, 0, COUL_FOND_PB);
-	sudoku_afficher_pb(0, 8, COUL_FOND_PB);
-	sudoku_afficher_pb(1, 0, COUL_TITRE);
-	sudoku_afficher_pb(2, 0, COUL_FOND_PB);
-	sudoku_afficher_pb(4, 4, COUL_FOND_PB);
-	sudoku_afficher_pb(8, 0, COUL_FOND_PB);
-	sudoku_afficher_pb(8, 8, COUL_FOND_PB);
+	sudoku_afficher_val(S);
 	P1.x = 0;
 	P1.y = 0;
 	P2.y = LARGEUR;
@@ -60,7 +85,7 @@ void	sudoku_afficher(SUDOKU S)
 		{
 			for (j = 0; j < 2; j++)
 			{
-				P6.x = P5.x + LARGEUR_TRAIT / 2;
+				P6.x = P5.x + (LARGEUR_TRAIT >> 1);
 				P7.y = P5.x;
 				P8.y = P6.x;
 				// Rendu des traits secondaires
@@ -68,7 +93,7 @@ void	sudoku_afficher(SUDOKU S)
 				draw_fill_rectangle(P7, P8, COUL_TRAIT); // Horizontaux
 				P5.x += TAILLE_CASE;
 			}
-			P5.x = P1.x + TAILLE_CASE + LARGEUR_TRAIT / 2;
+			P5.x = P1.x + TAILLE_CASE + (LARGEUR_TRAIT >> 1);
 		}
 	}
 }

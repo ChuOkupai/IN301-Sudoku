@@ -28,6 +28,7 @@ SUDOKU	lire_fichier(char *nom)
 			travail = 1;
 		else if (c >= '0' && c <= '9')
 		{
+			// Si c'est une valeur de travail, elle est stockée entre ]0;9]
 			S.val[i][j] = (travail) ? c ^ 48: c;
 			if (travail)
 				travail = 0;
