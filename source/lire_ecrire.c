@@ -20,7 +20,7 @@ SUDOKU	lire_fichier(char *nom)
 	while (*nom && (*nom < '0' || *nom > '9'))
 		nom++;
 	printf("%s\n", nom);
-	S.save = atoi(nom);
+	S.save = (short)atoi(nom);
 	i = 0;
 	j = 0;
 	travail = 0;

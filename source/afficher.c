@@ -75,20 +75,19 @@ void	sudoku_afficher(SUDOKU S)
 		draw_fill_rectangle(P1, P2, COUL_TRAIT); // Verticaux
 		draw_fill_rectangle(P3, P4, COUL_TRAIT); // Horizontaux
 		P1.x += (LARGEUR - LARGEUR_TRAIT) / 3;
-		if (i < 3)
+		if (i > 2)
+			continue;
+		for (j = 0; j < 2; j++)
 		{
-			for (j = 0; j < 2; j++)
-			{
-				P6.x = P5.x + (LARGEUR_TRAIT >> 1);
-				P7.y = P5.x;
-				P8.y = P6.x;
-				// Rendu des traits secondaires
-				draw_fill_rectangle(P5, P6, COUL_TRAIT); // Verticaux
-				draw_fill_rectangle(P7, P8, COUL_TRAIT); // Horizontaux
-				P5.x += TAILLE_CASE;
-			}
-			P5.x = P1.x + TAILLE_CASE + (LARGEUR_TRAIT >> 1);
+			P6.x = P5.x + (LARGEUR_TRAIT >> 1);
+			P7.y = P5.x;
+			P8.y = P6.x;
+			// Rendu des traits secondaires
+			draw_fill_rectangle(P5, P6, COUL_TRAIT); // Verticaux
+			draw_fill_rectangle(P7, P8, COUL_TRAIT); // Horizontaux
+			P5.x += TAILLE_CASE;
 		}
+		P5.x = P1.x + TAILLE_CASE + (LARGEUR_TRAIT >> 1);
 	}
 	P1.x = TAILLE_CASE / 8;
 	P1.y = HAUTEUR - P1.x;
