@@ -29,7 +29,6 @@ void	sudoku_afficher_val(SUDOKU S)
 	POINT	P;
 	COULEUR	C;
 	char	buf[2];
-	int		travail;
 	
 	P.y = TAILLE_CASE >> 1;
 	buf[1] = '\0';
@@ -38,11 +37,12 @@ void	sudoku_afficher_val(SUDOKU S)
 		P.x = TAILLE_CASE >> 1;
 		for (int j = 0; j < 9; j++)
 		{
-			travail = (S.val[i][j] < 10) ? 1 : 0;
-			C = (travail) ? COUL_VAL_TRAVAIL : COUL_VAL_DEPART;
-			buf[0] = (travail) ? S.val[i][j] + 48 : S.val[i][j];
-			if (buf[0] != '0')
+			if (S.val[i][j]) // Si la valeur est différente de 0
+			{
+				C = (S.travail[i][j]) ? COUL_VAL_TRAVAIL : COUL_VAL_DEPART;
+				buf[0] = S.val[i][j] + 48;
 				aff_pol_centre(buf, TAILLE_POLICE, P, C);
+			}
 			P.x += TAILLE_CASE;
 		}
 		P.y += TAILLE_CASE;
@@ -55,7 +55,6 @@ void	sudoku_afficher(SUDOKU S)
 	int		i, j;
 	
 	fill_screen(COUL_FOND);
-	sudoku_afficher_val(S);
 	P1.x = 0;
 	P1.y = 0;
 	P2.y = LARGEUR;
@@ -92,4 +91,5 @@ void	sudoku_afficher(SUDOKU S)
 	P1.x = TAILLE_CASE / 8;
 	P1.y = HAUTEUR - P1.x;
 	aff_pol(S.nom, TAILLE_POLICE, P1, COUL_TITRE);
+	sudoku_afficher_val(S);
 }

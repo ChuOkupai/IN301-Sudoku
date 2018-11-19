@@ -4,9 +4,10 @@
 // Stockage du sudoku
 typedef struct sudoku
 {
-	char	**val; // Stocke les valeurs
-	char	*nom;  // Nom du fichier
-	short	save;  // Numéro de sauvegarde du fichier actuel
+	char	**val;     // Stocke les valeurs
+	char	**travail; // Si la case vaut 1, c'est une valeur de travail
+	char	*nom;      // Nom du fichier
+	short	save;      // Numéro de sauvegarde du fichier actuel
 }	SUDOKU;
 
 // Alloue la mémoire à un sudoku
@@ -15,12 +16,9 @@ SUDOKU	mallocSUDOKU();
 // Libère la mémoire allouée à un sudoku
 void	freeSUDOKU(SUDOKU S);
 
-// Retourne la valeur réelle stockée à l'index i, j
-int	valGrille(SUDOKU S, int i, int j);
-// Macro pour simplifier le code
-#define VAL(I,J)	valGrille((SUDOKU)S, (int)I, (int)J)
-
 // Système de pile avec ses fonctions de contrôle
+
+#define PILE_MAX 512 // Valeur arbitraire
 
 // Element de la pile
 typedef struct grille GRILLE;
@@ -33,6 +31,7 @@ struct grille
 typedef struct pile
 {
 	GRILLE	*premiere; // Pointeur vers la grille suivante
+	short	n;         // Nombre de grilles actuellement stockées
 }	PILE;
 
 // Alloue la mémoire à une pile

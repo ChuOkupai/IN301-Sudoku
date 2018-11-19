@@ -10,13 +10,13 @@ SUDOKU	lire_fichier(char *nom)
 	int		c, i, j, travail;
 	
 	S.val = NULL;
-	if (! strstr(nom, ".sudoku\0")){printf("Erreur nom fichier!\n");
-		return S;} // Erreur nom fichier
+	if (! strstr(nom, ".sudoku\0"))
+		exit(EXIT_FAILURE); // Erreur nom fichier
 	S = mallocSUDOKU();
 	S.nom = nom;
 	F = fopen(nom, "r");
 	if (! F)
-		return S;
+		exit(EXIT_FAILURE);
 	while (*nom && (*nom < '0' || *nom > '9'))
 		nom++;
 	printf("%s\n", nom);
@@ -31,17 +31,16 @@ SUDOKU	lire_fichier(char *nom)
 		else if (c >= '0' && c <= '9')
 		{
 			// Si c'est une valeur de travail, elle est stockée entre ]0;9]
-			S.val[i][j] = (travail) ? c ^ 48: c;
+			S.val[i][j] = c ^ 48;
+			S.travail[i][j] = (travail) ? 1 : 0;
 			if (travail)
 				travail = 0;
 			j++;
 		}
 		else if (c == '.')
 		{
-			if (! travail)
-			{
-				// erreur syntaxe
-			}
+			if (travail)
+				exit(EXIT_FAILURE); // erreur syntaxe
 			else
 				S.val[i][j] = 0;
 			j++;

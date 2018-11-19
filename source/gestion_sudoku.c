@@ -1,27 +1,20 @@
 #include "gestion_sudoku.h"
 #include <stdlib.h>
 
-int	valGrille(SUDOKU S, int i, int j)
-{
-	// Si c'est un chiffre, le renvoie
-	if (S.val[i][j] < 10)
-		return S.val[i][j];
-	// Sinon retourne la valeur - 48 (équivalent à '0' ou 110000 en binaire)
-	return S.val[i][j] ^ 48;
-}
-
 SUDOKU	mallocSUDOKU()
 {
 	SUDOKU S;
 	
 	S.val = (char**)malloc(9 * sizeof(char*));
-	if (! S.val)
-		return S; // erreur allocation mémoire
+	S.travail = (char**)malloc(9 * sizeof(char*));
+	if (! S.val || ! S.travail)
+		exit(EXIT_FAILURE); // erreur allocation mémoire
 	for (int i = 0; i < 9; i++)
 	{
 		S.val[i] = (char*)malloc(9 * sizeof(char));
-		if (! S.val[i])
-			return S; // erreur allocation mémoire
+		S.travail[i] = (char*)malloc(9 * sizeof(char));
+		if (! S.val[i] || ! S.travail[i])
+			exit(EXIT_FAILURE); // erreur allocation mémoire
 	}
 	return S;
 }
@@ -39,7 +32,7 @@ PILE*	nouvellePILE()
 	
 	P = malloc(sizeof(PILE*));
 	if (! P)
-		return P; // erreur allocation mémoire
+		exit(EXIT_FAILURE); // erreur allocation mémoire
 	P->premiere = NULL;
 	return P;
 }
@@ -47,12 +40,12 @@ PILE*	nouvellePILE()
 void	push(PILE *P, SUDOKU S)
 {
 	if (! P || ! S.val)
-		return;
+		exit(EXIT_FAILURE); // Vide
 	GRILLE *G;
 	
 	G = malloc(sizeof(GRILLE*));
 	if (! G)
-		return; // erreur allocation mémoire
+		exit(EXIT_FAILURE); // erreur allocation mémoire
 	G->val = S.val;
 	G->suivante = P->premiere;
 	P->premiere = G;
@@ -61,7 +54,7 @@ void	push(PILE *P, SUDOKU S)
 void	pop(PILE *P)
 {
 	if (! P || ! P->premiere)
-		return;
+		exit(EXIT_FAILURE); // Vide
 	GRILLE *G;
 	
 	G = P->premiere;
@@ -72,14 +65,14 @@ void	pop(PILE *P)
 char**	pick(PILE *P)
 {
 	if (! P || P->premiere)
-		return NULL;
+		exit(EXIT_FAILURE); // Vide
 	return P->premiere->val;
 }
 
 void	freePILE(PILE *P)
 {
 	if (! P || ! P->premiere)
-		return;
+		exit(EXIT_FAILURE); // Vide
 	while (P->premiere)
 		pop(P);
 }

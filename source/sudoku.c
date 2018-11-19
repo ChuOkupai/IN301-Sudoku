@@ -4,7 +4,7 @@
 #include "gestion_sudoku.h"
 #include "lire_ecrire.h"
 
-/*SUDOKU jouer(SUDOKU S)
+/*SUDOKU	jouer(SUDOKU S)
 {
 	POINT P = wait_clic();
 	int ligne = ; // À écrire
@@ -13,18 +13,17 @@
 	return S;
 }*/
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	if (argc < 2)
-		exit(1);
+		exit(EXIT_FAILURE);
 	SUDOKU S;
 	S = lire_fichier(argv[1]);
 	if (! S.val)
-		exit(2);
+		exit(EXIT_FAILURE);
 	initialiser_fenetre_graphique();
 	sudoku_afficher(S);
 	affiche_all();
-	//wait_clic();
+	freeSUDOKU(S);
 	terminer_fenetre_graphique();
-	exit(0);
 }
