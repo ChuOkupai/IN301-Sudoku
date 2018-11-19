@@ -17,10 +17,12 @@ SUDOKU	lire_fichier(char *nom)
 	F = fopen(nom, "r");
 	if (! F)
 		exit(EXIT_FAILURE);
-	while (*nom && (*nom < '0' || *nom > '9'))
+	while (*nom != '.')
 		nom++;
+	nom++;
 	printf("%s\n", nom);
 	S.save = (short)atoi(nom);
+	printf("%d\n", S.save);
 	i = 0;
 	j = 0;
 	travail = 0;
@@ -30,11 +32,9 @@ SUDOKU	lire_fichier(char *nom)
 			travail = 1;
 		else if (c >= '0' && c <= '9')
 		{
-			// Si c'est une valeur de travail, elle est stockée entre ]0;9]
 			S.val[i][j] = c ^ 48;
 			S.travail[i][j] = (travail) ? 1 : 0;
-			if (travail)
-				travail = 0;
+			travail = 0;
 			j++;
 		}
 		else if (c == '.')

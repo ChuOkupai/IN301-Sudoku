@@ -32,7 +32,7 @@ void	sudoku_afficher_val(SUDOKU S)
 	
 	P.y = TAILLE_CASE >> 1;
 	buf[1] = '\0';
-	for (int i = 0; i < 9; i++)
+	for (int i = 8; i >= 0; i--)
 	{
 		P.x = TAILLE_CASE >> 1;
 		for (int j = 0; j < 9; j++)
