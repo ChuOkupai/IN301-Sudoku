@@ -34,6 +34,8 @@ SUDOKU	sudoku_malloc()
 
 int	sudoku_n_valide(int **t, int i, int j, int n)
 {
+	if (! n)
+		return 1;
 	int k;
 	
 	for (k = i; k >= 0; k--)
@@ -59,9 +61,18 @@ SUDOKU	sudoku_modifier_case(SUDOKU S, int i, int j)
 {
 	if (! S.travail[i][j])
 		return S;
-	for (int n = 1; n < 10; n++)
-		if (sudoku_n_valide(S.val, i, j, n))
-		printf("%d", n);
-	putchar('\n');
+	if (S.val[i][j] == 9)
+		S.val[i][j] = 0;
+	else
+		for (int n = S.val[i][j] + 1; n < 10; n++)
+		{
+			if (sudoku_n_valide(S.val, i, j, n))
+			{
+				S.val[i][j] = n;
+				break;
+			}
+			else if (n == 9)
+				S.val[i][j] = 0;
+		}
 	return S;
 }

@@ -15,11 +15,8 @@ SUDOKU	jouer(SUDOKU S)
 	k = 0;
 	a = 0;
 	wait_key_arrow_clic(&k, &a, &P);
-	if (P.x != -1 && P.y != -1)
-	{
-		if (P.y <= LARGEUR)
-			S = sudoku_modifier_case(S, (8 - P.y / TAILLE_CASE), P.x / TAILLE_CASE);
-	}
+	if (P.x != -1 && P.y != -1 && P.y <= LARGEUR)
+		S = sudoku_modifier_case(S, (8 - P.y / TAILLE_CASE), P.x / TAILLE_CASE);
 	else if (k == 'U')
 		printf("Undo\n");
 	else if (k == 'V')
@@ -44,7 +41,6 @@ int	main(int argc, char **argv)
 	{
 		sudoku_afficher(S);
 		affiche_all();
-		attendre(100);
 		S = jouer(S);
 	}
 	sudoku_afficher(S);

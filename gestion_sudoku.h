@@ -26,6 +26,8 @@ typedef struct sudoku
 // Alloue la mémoire à un sudoku
 SUDOKU	sudoku_malloc();
 
+int	sudoku_n_valide(int **t, int i, int j, int n);
+
 SUDOKU	sudoku_modifier_case(SUDOKU S, int i, int j);
 
 #endif /* gestion_sudoku.h */

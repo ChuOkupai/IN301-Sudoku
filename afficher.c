@@ -54,14 +54,25 @@ void	sudoku_afficher_grille()
 	}
 }
 
+void	sudoku_afficher_pb(int i, int j)
+{
+	POINT	P1, P2;
+	
+	P1.x = j * TAILLE_CASE;
+	P1.y = i * TAILLE_CASE;
+	P2.x = P1.x + TAILLE_CASE;
+	P2.y = P1.y + TAILLE_CASE;
+	draw_fill_rectangle(P1, P2, COUL_FOND_PB);
+}
+
 void	sudoku_afficher(SUDOKU S)
 {
 	POINT	P;
 	COULEUR	C;
 	char	buf[2];
+	int		v;
 	
 	fill_screen(COUL_FOND);
-	sudoku_afficher_grille();
 	P.x = TAILLE_CASE / 8;
 	P.y = HAUTEUR - P.x;
 	aff_pol(S.nom, TAILLE_POLICE, P, COUL_TITRE);
@@ -72,6 +83,14 @@ void	sudoku_afficher(SUDOKU S)
 		P.x = TAILLE_CASE / 2;
 		for (int j = 0; j < 9; j++)
 		{
+			if (! S.val[i][j])
+			{
+				v = 0;
+				for (int n = 1; n < 10; n++)
+					v += sudoku_n_valide(S.val, i, j, n);
+				if (! v)
+					sudoku_afficher_pb(i, j); // A debug
+			}
 			if (S.val[i][j]) // Si la valeur est différente de 0
 			{
 				C = (S.travail[i][j]) ? COUL_VAL_TRAVAIL : COUL_VAL_DEPART;
@@ -82,41 +101,5 @@ void	sudoku_afficher(SUDOKU S)
 		}
 		P.y += TAILLE_CASE;
 	}
-}
-
-void	sudoku_couleur_case(int i, int j, COULEUR C)
-{
-	POINT	P1, P2;
-	
-	P1.x = j * TAILLE_CASE;
-	P1.y = i * TAILLE_CASE;
-	P2.x = P1.x + TAILLE_CASE;
-	P2.y = P1.y + TAILLE_CASE;
-	if (! i)
-		P1.y += LARGEUR_TRAIT + 1;
-	else if (i == 8)
-		P2.y -= LARGEUR_TRAIT + 1;
-	else if (i == 2 || i == 5)
-		P2.y -= LARGEUR_TRAIT2 + 1;
-	else if (i == 3 || i == 6)
-		P1.y += LARGEUR_TRAIT2 + 1;
-	i %= 3;
-	if (! i || i == 1)
-		P2.y -= LARGEUR_TRAIT2 / 2 + 1;
-	if (i == 1 || i == 2)
-		P1.y += LARGEUR_TRAIT2 / 2 + 1;
-	if (! j)
-		P1.x += LARGEUR_TRAIT + 1;
-	else if (j == 8)
-		P2.x -= LARGEUR_TRAIT + 1;
-	else if (j == 2 || j == 5)
-		P2.x -= LARGEUR_TRAIT2 + 1;
-	else if (j == 3 || j == 6)
-		P1.x += LARGEUR_TRAIT2 + 1;
-	j %= 3;
-	if (! j || j == 1)
-		P2.x -= LARGEUR_TRAIT2 / 2 + 1;
-	if (j == 1 || j == 2)
-		P1.x += LARGEUR_TRAIT2 / 2 + 1;
-	draw_fill_rectangle(P1, P2, C);
+	sudoku_afficher_grille();
 }
