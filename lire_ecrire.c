@@ -21,7 +21,7 @@ SUDOKU	lire_fichier(char *nom)
 		nom++;
 	nom++;
 	printf("%s\n", nom);
-	S.save = (short)atoi(nom);
+	S.save = atoi(nom);
 	printf("%d\n", S.save);
 	i = 0;
 	j = 0;
@@ -55,7 +55,7 @@ SUDOKU	lire_fichier(char *nom)
 	return S;
 }
 
-void	ecrire_fichier(SUDOKU S)
+void	ecrire_fichier(SUDOKU *S)
 {
 	
 }

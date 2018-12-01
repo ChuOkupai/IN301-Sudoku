@@ -40,7 +40,7 @@ void	sudoku_afficher_grille(SUDOKU S)
 			continue;
 		for (int j = 0; j < 2; j++)
 		{
-			P6.x = P5.x + (LARGEUR_TRAIT >> 1);
+			P6.x = P5.x + (LARGEUR_TRAIT / 2);
 			P7.y = P5.x;
 			P8.y = P6.x;
 			// Rendu des traits secondaires
@@ -48,7 +48,7 @@ void	sudoku_afficher_grille(SUDOKU S)
 			draw_fill_rectangle(P7, P8, COUL_TRAIT); // Horizontaux
 			P5.x += TAILLE_CASE;
 		}
-		P5.x = P1.x + TAILLE_CASE + (LARGEUR_TRAIT >> 1);
+		P5.x = P1.x + TAILLE_CASE + (LARGEUR_TRAIT / 2);
 	}
 }
 
@@ -58,11 +58,11 @@ void	sudoku_afficher_val(SUDOKU S)
 	COULEUR	C;
 	char	buf[2];
 	
-	P.y = TAILLE_CASE >> 1;
+	P.y = TAILLE_CASE / 2;
 	buf[1] = '\0';
 	for (int i = 8; i >= 0; i--)
 	{
-		P.x = TAILLE_CASE >> 1;
+		P.x = TAILLE_CASE / 2;
 		for (int j = 0; j < 9; j++)
 		{
 			if (S.val[i][j]) // Si la valeur est différente de 0
@@ -98,5 +98,4 @@ void	sudoku_afficher_pb(int i, int j)
 	P2.x = P1.x + TAILLE_CASE;
 	P2.y = P1.y + TAILLE_CASE;
 	draw_fill_rectangle(P1, P2, COUL_FOND_PB);
-	sudoku_afficher_grille(S);
 }

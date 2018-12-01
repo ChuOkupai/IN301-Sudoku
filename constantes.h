@@ -1,6 +1,8 @@
 #ifndef __CONSTANTES_H
 #define __CONSTANTES_H
 
+#define GRILLE_MAX 256 // Nombre maximum de grilles stockées
+
 // Les différentes tailles
 #define TAILLE_CASE   81                  // La taille d'une case
 #define LARGEUR       (9*TAILLE_CASE)     // La taille horizontale de la fenêtre

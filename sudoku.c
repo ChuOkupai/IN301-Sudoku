@@ -24,6 +24,6 @@ int	main(int argc, char **argv)
 	initialiser_fenetre_graphique();
 	sudoku_afficher(S);
 	affiche_all();
-	freeSUDOKU(S);
+	freeSUDOKU(&S);
 	terminer_fenetre_graphique();
 }
