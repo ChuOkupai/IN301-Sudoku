@@ -4,11 +4,12 @@
 #define GRILLE_MAX 256 // Nombre maximum de grilles stockées
 
 // Les différentes tailles
-#define TAILLE_CASE   81                  // La taille d'une case
-#define LARGEUR       (9*TAILLE_CASE)     // La taille horizontale de la fenêtre
-#define HAUTEUR       ((9+1)*TAILLE_CASE) // La taille verticale de la fenêtre
-#define TAILLE_POLICE ((2*TAILLE_CASE)/3) // La taille de la police des valeurs de départ et de travail
-#define LARGEUR_TRAIT (TAILLE_CASE/27)    // La largeur des traits de séparation
+#define TAILLE_CASE    81                  // La taille d'une case
+#define LARGEUR        (9*TAILLE_CASE)     // La taille horizontale de la fenêtre
+#define HAUTEUR        ((9+1)*TAILLE_CASE) // La taille verticale de la fenêtre
+#define TAILLE_POLICE  ((2*TAILLE_CASE)/3) // La taille de la police des valeurs de départ et de travail
+#define LARGEUR_TRAIT  (TAILLE_CASE/20)    // La largeur des traits principaux
+#define LARGEUR_TRAIT2 (LARGEUR_TRAIT/2)   // La largeur des traits secondaires
 
 // Les différentes couleurs
 #define COUL_TITRE       0x7D75FF // Couleur du titre

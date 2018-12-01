@@ -12,17 +12,11 @@ SUDOKU	lire_fichier(char *nom)
 	S.val = NULL;
 	if (! strstr(nom, ".sudoku\0"))
 		exit(EXIT_FAILURE); // Erreur nom fichier
-	S = mallocSUDOKU();
+	S = sudoku_malloc();
 	S.nom = nom;
 	F = fopen(nom, "r");
 	if (! F)
-		exit(EXIT_FAILURE);
-	while (*nom != '.')
-		nom++;
-	nom++;
-	printf("%s\n", nom);
-	S.save = atoi(nom);
-	printf("%d\n", S.save);
+		exit(EXIT_FAILURE); // Fichier inexistant
 	i = 0;
 	j = 0;
 	travail = 0;

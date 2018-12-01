@@ -1,15 +1,8 @@
 #include "gestion_sudoku.h"
 #include <stdlib.h>
 
-// Stocke une ancienne grille
-struct grille
-{
-	int		**val;       // Stocke les valeurs
-	GRILLE	*precedente; // Pointeur vers la grille précédente
-};
-
 // Alloue la mémoire d'un tableau de int de taille 9x9
-int**	mallocTab()
+int**	tab_malloc()
 {
 	int	**t;
 	
@@ -25,20 +18,39 @@ int**	mallocTab()
 	return t;
 }
 
-SUDOKU	mallocSUDOKU()
+// Libère la mémoire d'un tableau de int de taille 9x9
+void	tab_free(int **t)
 {
-	SUDOKU	S;
+	if (! t)
+		return;
+	for (int i = 0; i < 9; i++)
+		free(t[i]);
+	free(t);
+}
+
+SUDOKU	sudoku_malloc()
+{
+	SUDOKU S;
 	
-	S.val = mallocTab();
-	S.travail = mallocTab();
+	S.val = tab_malloc();
+	S.travail = tab_malloc();
 	S.nom = NULL;
-	S.save = 0;
-	S.G = NULL;
+	S.A = NULL;
 	S.max = 0;
 	return S;
 }
 
-void	push(SUDOKU *S)
+void	sudoku_free(SUDOKU S)
+{
+	if (S.val)
+		tab_free(S.val);
+	if (S.travail)
+		tab_free(S.travail);
+	//while (S->max)
+		//pop(S);
+}
+
+/*void	push(SUDOKU *S)
 {
 	GRILLE	*G;
 	
@@ -52,17 +64,7 @@ void	push(SUDOKU *S)
 	S->max++;
 }
 
-// Libère la mémoire d'un tableau de int de taille 9x9
-void	freeTab(int **t)
-{
-	if (! t)
-		return;
-	for (int i = 0; i < 9; i++)
-		free(t[i]);
-	free(t);
-}
-
-// Si elle existe, libère la mémoire de la dernière grille de sudoku sauvegardée
+// Si elle existe, libère la mémoire de la dernière action sauvegardée
 void	pop(SUDOKU *S)
 {
 	if (! S || ! S->G)
@@ -84,14 +86,4 @@ void	recover(SUDOKU *S)
 		freeTab(S->val);
 	S->val = S->G->val;
 	pop(S);
-}
-
-void	freeSUDOKU(SUDOKU *S)
-{
-	if (S->val)
-		freeTab(S->val);
-	if (S->travail)
-		freeTab(S->travail);
-	while (S->max)
-		pop(S);
-}
+}*/

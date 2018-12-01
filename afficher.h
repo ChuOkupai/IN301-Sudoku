@@ -12,4 +12,8 @@ void	terminer_fenetre_graphique();
 // Fonction qui affiche l'état courant du sudoku
 void	sudoku_afficher(SUDOKU S);
 
+void	sudoku_afficher_pb0(SUDOKU S, int i, int j);
+
+void	sudoku_afficher_pb(SUDOKU S, int i, int j);
+
 #endif /* afficher.h */

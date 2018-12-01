@@ -1,8 +1,15 @@
 #ifndef __SUDOKU_H
 #define __SUDOKU_H
 
-typedef struct grille GRILLE;
-struct grille;
+// Stocke une action (clic sur une case)
+typedef struct action ACTION;
+struct action
+{
+	int		i;         // Emplacement y de la valeur
+	int		j;         // Emplacement x de la valeur
+	int		val;       // Ancienne valeur
+	ACTION	*precedente; // Pointeur vers l'action précédente
+};
 
 typedef struct sudoku
 {
@@ -10,23 +17,22 @@ typedef struct sudoku
 	int		**val;     // Stocke les valeurs
 	int		**travail; // Si la case vaut 1, c'est une valeur de travail
 	char	*nom;      // Nom du fichier
-	int		save;      // Numéro de sauvegarde du fichier actuel
 	
-	/** Stockage des anciennes grilles **/
-	GRILLE	*G;  // Pointeur vers la grille précédente
-	int		max; // Nombre de grilles actuellement stockées
+	/** Stockage des actions précédentes (clic sur une case) **/
+	ACTION	*A;  // Pointeur vers la dernière action
+	int		max; // Nombre d'actions actuellement stockées
 }	SUDOKU;
 
 // Alloue la mémoire à un sudoku
-SUDOKU	mallocSUDOKU();
-
-// Si elle existe, ajoute une grille de sudoku à la liste
-void	push(SUDOKU *S);
-
-// Si elle existe, récupère la dernière grille de sudoku sauvegardée en mémoire
-void	recover(SUDOKU *S);
+SUDOKU	sudoku_malloc();
 
 // Libère la mémoire allouée à un sudoku
-void	freeSUDOKU(SUDOKU *S);
+void	sudoku_free(SUDOKU S);
+
+/*// Ajoute une action à la pile
+void	push(SUDOKU *S);
+
+// Récupère la dernière action sauvegardée en mémoire
+void	recover(SUDOKU *S);*/
 
 #endif /* gestion_sudoku.h */
