@@ -59,7 +59,7 @@ void	sudoku_afficher_pb(int i, int j)
 	POINT	P1, P2;
 	
 	P1.x = j * TAILLE_CASE;
-	P1.y = i * TAILLE_CASE;
+	P1.y = (8 - i) * TAILLE_CASE;
 	P2.x = P1.x + TAILLE_CASE;
 	P2.y = P1.y + TAILLE_CASE;
 	draw_fill_rectangle(P1, P2, COUL_FOND_PB);

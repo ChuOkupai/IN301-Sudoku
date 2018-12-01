@@ -30,8 +30,6 @@ SUDOKU	sudoku_malloc()
 	return S;
 }
 
-#include <stdio.h>
-
 int	sudoku_n_valide(int **t, int i, int j, int n)
 {
 	if (! n)
