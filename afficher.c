@@ -84,7 +84,7 @@ void	sudoku_afficher(SUDOKU S)
 	}
 }
 
-void	sudoku_afficher_pb(int i, int j)
+void	sudoku_couleur_case(int i, int j, COULEUR C)
 {
 	POINT	P1, P2;
 	
@@ -118,5 +118,5 @@ void	sudoku_afficher_pb(int i, int j)
 		P2.x -= LARGEUR_TRAIT2 / 2 + 1;
 	if (j == 1 || j == 2)
 		P1.x += LARGEUR_TRAIT2 / 2 + 1;
-	draw_fill_rectangle(P1, P2, COUL_FOND_PB);
+	draw_fill_rectangle(P1, P2, C);
 }

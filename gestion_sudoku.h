@@ -26,13 +26,6 @@ typedef struct sudoku
 // Alloue la mémoire à un sudoku
 SUDOKU	sudoku_malloc();
 
-// Libère la mémoire allouée à un sudoku
-void	sudoku_free(SUDOKU S);
-
-/*// Ajoute une action à la pile
-void	push(SUDOKU *S);
-
-// Récupère la dernière action sauvegardée en mémoire
-void	recover(SUDOKU *S);*/
+SUDOKU	sudoku_modifier_case(SUDOKU S, int i, int j);
 
 #endif /* gestion_sudoku.h */

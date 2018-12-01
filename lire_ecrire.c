@@ -20,23 +20,15 @@ SUDOKU	lire_fichier(char *nom)
 	i = 0;
 	j = 0;
 	travail = 0;
-	for (c = fgetc(F); c != EOF && i < 9 && j < 9; c = fgetc(F))
+	for (c = fgetc(F); c != EOF && i < 9; c = fgetc(F))
 	{
 		if (c == '*')
 			travail = 1;
-		else if (c >= '0' && c <= '9')
+		else if ((c >= '0' && c <= '9') || c == '.')
 		{
-			S.val[i][j] = c ^ 48;
-			S.travail[i][j] = (travail) ? 1 : 0;
+			S.val[i][j] = (c == '.') ? 0 : c ^ 48;
+			S.travail[i][j] = (travail ||c == '.') ? 1 : 0;
 			travail = 0;
-			j++;
-		}
-		else if (c == '.')
-		{
-			if (travail)
-				exit(EXIT_FAILURE); // erreur syntaxe
-			else
-				S.val[i][j] = 0;
 			j++;
 		}
 		if (j == 9)

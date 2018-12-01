@@ -18,16 +18,6 @@ int**	tab_malloc()
 	return t;
 }
 
-// Libère la mémoire d'un tableau de int de taille 9x9
-void	tab_free(int **t)
-{
-	if (! t)
-		return;
-	for (int i = 0; i < 9; i++)
-		free(t[i]);
-	free(t);
-}
-
 SUDOKU	sudoku_malloc()
 {
 	SUDOKU S;
@@ -40,50 +30,38 @@ SUDOKU	sudoku_malloc()
 	return S;
 }
 
-void	sudoku_free(SUDOKU S)
-{
-	if (S.val)
-		tab_free(S.val);
-	if (S.travail)
-		tab_free(S.travail);
-	//while (S->max)
-		//pop(S);
-}
+#include <stdio.h>
 
-/*void	push(SUDOKU *S)
+int	sudoku_n_valide(int **t, int i, int j, int n)
 {
-	GRILLE	*G;
+	int k;
 	
-	G = (GRILLE*)malloc(sizeof(GRILLE));
-	if (! G)
-		exit(EXIT_FAILURE); // erreur allocation mémoire
-	G->precedente = S->G;
-	G->val = S->val;
-	S->G = G;
-	S->val = mallocTab();
-	S->max++;
+	for (k = i; k >= 0; k--)
+		if (t[k][j] == n)
+			return 0;
+	for (k = i + 1; k < 9; k++)
+		if (t[k][j] == n)
+			return 0;
+	for (k = j; k >= 0; k--)
+		if (t[i][k] == n)
+			return 0;
+	for (k = j + 1; k < 9; k++)
+		if (t[i][k] == n)
+			return 0;
+	for (k = i - i % 3; k < (i - i % 3 + 3); k++)
+		for (int l = j - j % 3; l < (j - j % 3 + 3); l++)
+			if (t[k][l] == n)
+				return 0;
+	return 1;
 }
 
-// Si elle existe, libère la mémoire de la dernière action sauvegardée
-void	pop(SUDOKU *S)
+SUDOKU	sudoku_modifier_case(SUDOKU S, int i, int j)
 {
-	if (! S || ! S->G)
-		return;
-	GRILLE	*G;
-	
-	G = S->G;
-	S->G = S->G->precedente;
-	freeTab(G->val);
-	free(G);
-	S->max--;
+	if (! S.travail[i][j])
+		return S;
+	for (int n = 1; n < 10; n++)
+		if (sudoku_n_valide(S.val, i, j, n))
+		printf("%d", n);
+	putchar('\n');
+	return S;
 }
-
-void	recover(SUDOKU *S)
-{
-	if (! S || ! S->G)
-		return;
-	if (S->val)
-		freeTab(S->val);
-	S->val = S->G->val;
-	pop(S);
-}*/

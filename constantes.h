@@ -1,7 +1,7 @@
 #ifndef __CONSTANTES_H
 #define __CONSTANTES_H
 
-#define GRILLE_MAX 256 // Nombre maximum de grilles stockées
+#define ACTION_MAX 1024 // Nombre maximum d'actions stockées
 
 // Les différentes tailles
 #define TAILLE_CASE    81                  // La taille d'une case
