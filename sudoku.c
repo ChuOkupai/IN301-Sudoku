@@ -13,13 +13,6 @@
 	return S;
 }*/
 
-void	sudoku_damier(SUDOKU S)
-{
-	for (int i = 0; i < 9; i++)
-		for (int j = 0; j < 9; j++)
-			sudoku_afficher_pb(S, i, j);
-}
-
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
@@ -30,7 +23,6 @@ int	main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	initialiser_fenetre_graphique();
 	sudoku_afficher(S);
-	sudoku_damier(S);
 	affiche_all();
 	sudoku_free(S);
 	terminer_fenetre_graphique();

@@ -13,7 +13,8 @@ void	terminer_fenetre_graphique()
 	wait_escape();
 }
 
-void	sudoku_afficher_grille(SUDOKU S)
+
+void	sudoku_afficher_grille()
 {
 	POINT	PX1, PX2, PY1, PY2;
 	int		distance;
@@ -53,14 +54,19 @@ void	sudoku_afficher_grille(SUDOKU S)
 	}
 }
 
-void	sudoku_afficher_val(SUDOKU S)
+void	sudoku_afficher(SUDOKU S)
 {
 	POINT	P;
 	COULEUR	C;
 	char	buf[2];
 	
-	P.y = TAILLE_CASE / 2;
+	fill_screen(COUL_FOND);
+	sudoku_afficher_grille();
+	P.x = TAILLE_CASE / 8;
+	P.y = HAUTEUR - P.x;
+	aff_pol(S.nom, TAILLE_POLICE, P, COUL_TITRE);
 	buf[1] = '\0';
+	P.y = TAILLE_CASE / 2;
 	for (int i = 8; i >= 0; i--)
 	{
 		P.x = TAILLE_CASE / 2;
@@ -78,30 +84,7 @@ void	sudoku_afficher_val(SUDOKU S)
 	}
 }
 
-void	sudoku_afficher(SUDOKU S)
-{
-	POINT	P;
-	
-	P.x = TAILLE_CASE / 8;
-	P.y = HAUTEUR - P.x;
-	fill_screen(COUL_FOND);
-	aff_pol(S.nom, TAILLE_POLICE, P, COUL_TITRE);
-	sudoku_afficher_grille(S);
-	sudoku_afficher_val(S);
-}
-
-void	sudoku_afficher_pb0(SUDOKU S, int i, int j)
-{
-	POINT	P1, P2;
-	
-	P1.x = j * TAILLE_CASE;
-	P1.y = i * TAILLE_CASE;
-	P2.x = P1.x + TAILLE_CASE;
-	P2.y = P1.y + TAILLE_CASE;
-	draw_fill_rectangle(P1, P2, COUL_FOND_PB);
-}
-
-void	sudoku_afficher_pb(SUDOKU S, int i, int j)
+void	sudoku_afficher_pb(int i, int j)
 {
 	POINT	P1, P2;
 	

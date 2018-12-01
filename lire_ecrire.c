@@ -51,5 +51,5 @@ SUDOKU	lire_fichier(char *nom)
 
 void	ecrire_fichier(SUDOKU *S)
 {
-	
+	(void)S;
 }
