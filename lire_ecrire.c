@@ -9,7 +9,6 @@ SUDOKU	lire_fichier(char *nom)
 	SUDOKU	S;
 	int		c, i, j, travail;
 	
-	S.val = NULL;
 	if (! strstr(nom, ".sudoku\0"))
 		exit(EXIT_FAILURE); // Erreur nom fichier
 	S = sudoku_malloc();
@@ -20,14 +19,16 @@ SUDOKU	lire_fichier(char *nom)
 	i = 0;
 	j = 0;
 	travail = 0;
-	for (c = fgetc(F); c != EOF && i < 9; c = fgetc(F))
+	for (c = fgetc(F); i < 9; c = fgetc(F))
 	{
+		if (c == EOF)
+			exit(EXIT_FAILURE); // Erreur syntaxe fichier
 		if (c == '*')
 			travail = 1;
 		else if ((c >= '0' && c <= '9') || c == '.')
 		{
 			S.val[i][j] = (c == '.') ? 0 : c ^ 48;
-			S.travail[i][j] = (travail ||c == '.') ? 1 : 0;
+			S.travail[i][j] = (travail || c == '.') ? 1 : 0;
 			travail = 0;
 			j++;
 		}

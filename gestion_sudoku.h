@@ -5,9 +5,9 @@
 typedef struct action ACTION;
 struct action
 {
-	int		i;         // Emplacement y de la valeur
-	int		j;         // Emplacement x de la valeur
-	int		val;       // Ancienne valeur
+	int		i;           // Emplacement y de la valeur
+	int		j;           // Emplacement x de la valeur
+	int		val;         // Ancienne valeur
 	ACTION	*precedente; // Pointeur vers l'action précédente
 };
 

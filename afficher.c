@@ -69,7 +69,7 @@ void	sudoku_afficher(SUDOKU S)
 {
 	POINT	P;
 	COULEUR	C;
-	char	buf[2];
+	char	buf[2]; // Pour stocker le chiffre à afficher
 	int		v;
 	
 	fill_screen(COUL_FOND);
@@ -89,7 +89,7 @@ void	sudoku_afficher(SUDOKU S)
 				for (int n = 1; n < 10; n++)
 					v += sudoku_n_valide(S.val, i, j, n);
 				if (! v)
-					sudoku_afficher_pb(i, j); // A debug
+					sudoku_afficher_pb(i, j);
 			}
 			if (S.val[i][j]) // Si la valeur est différente de 0
 			{

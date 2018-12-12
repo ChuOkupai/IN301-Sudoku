@@ -4,7 +4,7 @@
 #define ACTION_MAX 1024 // Nombre maximum d'actions stockées
 
 // Les différentes tailles
-#define TAILLE_CASE    81                  // La taille d'une case
+#define TAILLE_CASE    60                  // La taille d'une case
 #define LARGEUR        (9*TAILLE_CASE)     // La taille horizontale de la fenêtre
 #define HAUTEUR        ((9+1)*TAILLE_CASE) // La taille verticale de la fenêtre
 #define TAILLE_POLICE  ((2*TAILLE_CASE)/3) // La taille de la police des valeurs de départ et de travail
