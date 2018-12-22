@@ -2,27 +2,28 @@
 #include <stdlib.h>
 #include <string.h>
 #include "gestion_sudoku.h"
+#include "constantes.h"
 
 SUDOKU	lire_fichier(char *nom)
 {
-	FILE	*F;
-	SUDOKU	S;
-	int		c, i, j, travail;
+	FILE   *F;
+	SUDOKU S;
+	int    c, i, j, travail;
 	
 	if (! strstr(nom, ".sudoku\0"))
-		exit(EXIT_FAILURE); // Erreur nom fichier
+		afficher_erreur(ERR_EXTENSION, 1);
 	S = sudoku_malloc();
 	S.nom = nom;
 	F = fopen(nom, "r");
 	if (! F)
-		exit(EXIT_FAILURE); // Fichier inexistant
+		afficher_erreur(ERR_OUVERTURE, 1);
 	i = 0;
 	j = 0;
 	travail = 0;
 	for (c = fgetc(F); i < 9; c = fgetc(F))
 	{
 		if (c == EOF)
-			exit(EXIT_FAILURE); // Erreur syntaxe fichier
+			afficher_erreur(ERR_FORMAT, 1);
 		if (c == '*')
 			travail = 1;
 		else if ((c >= '0' && c <= '9') || c == '.')
@@ -42,7 +43,8 @@ SUDOKU	lire_fichier(char *nom)
 	return S;
 }
 
-void	ecrire_fichier(SUDOKU *S)
+SUDOKU	ecrire_fichier(SUDOKU S)
 {
 	(void)S;
+	return S;
 }

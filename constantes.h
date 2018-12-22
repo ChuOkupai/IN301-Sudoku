@@ -1,10 +1,20 @@
 #ifndef __CONSTANTES_H
 #define __CONSTANTES_H
 
-#define ACTION_MAX 1024 // Nombre maximum d'actions stockées
+// Taille maximum de la pile
+#define PILE_MAX 512
+
+// Les différentes erreurs
+#define ERR_ARGC      "Aucun fichier à charger"
+#define ERR_EXTENSION "Le fichier ne se termine pas par .sudoku"
+#define ERR_OUVERTURE "Impossible d'ouvrir le fichier"
+#define ERR_FORMAT    "Format non reconnu"
+#define ERR_MALLOC    "Impossible d'allouer la mémoire"
+#define ERR_SOLUTION  "Solution impossible"
+#define ERR_PVIDE     "Aucune action à annuler"
 
 // Les différentes tailles
-#define TAILLE_CASE    60                  // La taille d'une case
+#define TAILLE_CASE    80                  // La taille d'une case
 #define LARGEUR        (9*TAILLE_CASE)     // La taille horizontale de la fenêtre
 #define HAUTEUR        ((9+1)*TAILLE_CASE) // La taille verticale de la fenêtre
 #define TAILLE_POLICE  ((2*TAILLE_CASE)/3) // La taille de la police des valeurs de départ et de travail

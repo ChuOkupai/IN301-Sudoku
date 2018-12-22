@@ -11,8 +11,8 @@ void	initialiser_fenetre_graphique()
 void	terminer_fenetre_graphique()
 {
 	wait_escape();
+	exit(EXIT_SUCCESS);
 }
-
 
 void	sudoku_afficher_grille()
 {
@@ -54,6 +54,7 @@ void	sudoku_afficher_grille()
 	}
 }
 
+// Fonction qui affiche une case en rouge
 void	sudoku_afficher_pb(int i, int j)
 {
 	POINT	P1, P2;
@@ -67,10 +68,10 @@ void	sudoku_afficher_pb(int i, int j)
 
 void	sudoku_afficher(SUDOKU S)
 {
-	POINT	P;
-	COULEUR	C;
-	char	buf[2]; // Pour stocker le chiffre à afficher
-	int		v;
+	POINT   P;
+	COULEUR C;
+	char    buf[2]; // Pour stocker le chiffre à afficher
+	int     v;
 	
 	fill_screen(COUL_FOND);
 	P.x = TAILLE_CASE / 8;
@@ -91,10 +92,10 @@ void	sudoku_afficher(SUDOKU S)
 				if (! v)
 					sudoku_afficher_pb(i, j);
 			}
-			if (S.val[i][j]) // Si la valeur est différente de 0
+			else // Si la valeur existe
 			{
 				C = (S.travail[i][j]) ? COUL_VAL_TRAVAIL : COUL_VAL_DEPART;
-				buf[0] = S.val[i][j] + 48;
+				buf[0] = S.val[i][j] ^ 48;
 				aff_pol_centre(buf, TAILLE_POLICE, P, C);
 			}
 			P.x += TAILLE_CASE;

@@ -11,15 +11,15 @@ SUDOKU	jouer(SUDOKU S)
 	int		a = 0; // Pour passer une adresse en paramètre (puisque la fonction ne gère pas les pointeurs NULL)
 	
 	wait_key_arrow_clic(&k, &a, &P);
-	if (P.x != -1 && P.y != -1 && P.y <= LARGEUR)
+	if (P.x != -1 && P.y != -1 && P.y <= LARGEUR) // Clic dans une case
 		S = sudoku_modifier_case(S, (8 - P.y / TAILLE_CASE), P.x / TAILLE_CASE);
-	else if (k == 'U')
-		printf("Undo\n");
-	else if (k == 'V')
-		printf("Trouve\n");
-	else if (k == 'S')
+	else if (k == 'U')  // Undo
+		S = sudoku_annule(S);
+	else if (k == 'V') // Trouve
+		S = sudoku_trouve(S);
+	else if (k == 'S') // Sauve
 		printf("Sauvegarde\n");
-	else if (k == 'Q')
+	else if (k == 'Q') // Quitte
 		exit(EXIT_SUCCESS);
 	return S;
 }
@@ -27,7 +27,7 @@ SUDOKU	jouer(SUDOKU S)
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
-		exit(EXIT_FAILURE);
+		afficher_erreur(ERR_ARGC, 1);
 	SUDOKU S;
 	
 	S = lire_fichier(argv[1]);
@@ -40,5 +40,4 @@ int	main(int argc, char **argv)
 	}
 	sudoku_afficher(S);
 	terminer_fenetre_graphique();
-	exit(EXIT_SUCCESS);
 }

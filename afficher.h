@@ -12,7 +12,4 @@ void	terminer_fenetre_graphique();
 // Fonction qui affiche l'état courant du sudoku
 void	sudoku_afficher(SUDOKU S);
 
-// Fonction qui affiche une case en rouge
-void	sudoku_afficher_pb(int i, int j);
-
 #endif /* afficher.h */

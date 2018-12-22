@@ -22,10 +22,10 @@ sudoku.o: sudoku.c lire_ecrire.h gestion_sudoku.h constantes.h
 afficher.o: afficher.c afficher.h gestion_sudoku.h constantes.h
 	gcc $(CFLAGSGR) $<
 
-gestion_sudoku.o: gestion_sudoku.c gestion_sudoku.h
+gestion_sudoku.o: gestion_sudoku.c gestion_sudoku.h constantes.h
 	gcc $(CFLAGS) $<
 
-lire_ecrire.o: lire_ecrire.c lire_ecrire.h gestion_sudoku.h
+lire_ecrire.o: lire_ecrire.c lire_ecrire.h gestion_sudoku.h constantes.h
 	gcc $(CFLAGS) $<
 
 # Création de l'archive (rendu)
