@@ -5,6 +5,6 @@
 SUDOKU	lire_fichier(char *nom);
 
 // Ecriture d'un sudoku dans un fichier
-void	ecrire_fichier(SUDOKU S);
+SUDOKU	ecrire_fichier(SUDOKU S);
 
 #endif /* lire_ecrire.h */

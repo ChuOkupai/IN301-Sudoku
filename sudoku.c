@@ -18,16 +18,16 @@ SUDOKU	jouer(SUDOKU S)
 	else if (k == 'V') // Trouve
 		S = sudoku_trouve(S);
 	else if (k == 'S') // Sauve
-		printf("Sauvegarde\n");
+		S = ecrire_fichier(S);
 	else if (k == 'Q') // Quitte
 		exit(EXIT_SUCCESS);
 	return S;
 }
 
-int	main(int argc, char **argv)
+int		main(int argc, char **argv)
 {
 	if (argc < 2)
-		afficher_erreur(ERR_ARGC, 1);
+		erreur(ERR_ARGC, 1);
 	SUDOKU S;
 	
 	S = lire_fichier(argv[1]);
