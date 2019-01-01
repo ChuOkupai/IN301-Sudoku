@@ -139,13 +139,15 @@ SUDOKU	sudoku_modifier_case(SUDOKU S, int i, int j)
 			{
 				S = sudoku_ajoute_action(S, S.val[i][j], i, j);
 				S.val[i][j] = n;
+				S.etat[i][j] = TRAVAIL;
 				break;
 			}
 			else if (n == 9)
 			{
 				S = sudoku_ajoute_action(S, S.val[i][j], i, j);
 				S.val[i][j] = 0;
-			}
+				S.etat[i][j] = TRAVAIL;
+}
 		}
 	return S;
 }
@@ -158,6 +160,8 @@ SUDOKU	sudoku_annule(SUDOKU S)
 	return sudoku_supprime_action(S);
 }
 
+// Résolution du sudoku
+/** Renvoie 1 si impossible **/
 int		sudoku_resolution(SUDOKU S, int n)
 {
 	if (n > 80)
@@ -177,10 +181,7 @@ int		sudoku_resolution(SUDOKU S, int n)
 		if (sudoku_resolution(S, n + 1))
 			return 1;
 		else
-		{
 			S.val[i][j] = 0;
-			S.etat[i][j] = TRAVAIL;
-		}
 	}
 	return 0;
 }
@@ -190,4 +191,28 @@ SUDOKU	sudoku_trouve(SUDOKU S)
 	if (! sudoku_resolution(S, 0))
 		erreur(ERR_SOLUTION, 0);
 	return S;
+}
+
+int		sudoku_est_termine(SUDOKU S)
+{
+	for (int i = 0; i < 9; i++)
+		for (int j = 0; j < 9; j++)
+			if (! S.val[i][j])
+				return 0;
+	return 1;
+}
+
+void	sudoku_free(SUDOKU S)
+{
+	for (int i = 0; i < 9; i++)
+	{
+		free(S.val[i]);
+		free(S.etat[i]);
+	}
+	free(S.val);
+	free(S.etat);
+	free(S.nom);
+	while (S.P->max)
+		S = sudoku_supprime_action(S);
+	free(S.P);
 }

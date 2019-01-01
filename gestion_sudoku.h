@@ -48,4 +48,11 @@ SUDOKU	sudoku_annule(SUDOKU S);
 // Trouve une solution au sudoku si possible;
 SUDOKU	sudoku_trouve(SUDOKU S);
 
+// Vérifie si le sudoku est terminé
+/** Renvoie 1 si vrai, 0 sinon **/
+int		sudoku_est_termine(SUDOKU S);
+
+// Libération de la mémoire
+void	sudoku_free(SUDOKU S);
+
 #endif /* gestion_sudoku.h */

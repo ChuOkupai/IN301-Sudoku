@@ -8,12 +8,6 @@ void	initialiser_fenetre_graphique()
 	affiche_auto_off();
 }
 
-void	terminer_fenetre_graphique()
-{
-	wait_escape();
-	exit(EXIT_SUCCESS);
-}
-
 void	sudoku_afficher_grille()
 {
 	POINT	PX1, PX2, PY1, PY2;
@@ -108,4 +102,14 @@ void	sudoku_afficher(SUDOKU S)
 		P.y += TAILLE_CASE;
 	}
 	sudoku_afficher_grille();
+}
+
+void	sudoku_affiche_gagne()
+{
+	POINT	P;
+	char	*buf = "GAGN" Eacute;
+	
+	P.x = 6.5 * TAILLE_CASE;
+	P.y = HAUTEUR - TAILLE_CASE / 8;
+	aff_pol(buf, TAILLE_POLICE, P, COUL_GAGNE);
 }

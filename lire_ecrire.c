@@ -16,25 +16,18 @@ int		recupere_numero(char *nom)
 	return 0;
 }
 
-// supprime l'extension et éventuellement le numéro associé
-char*	supprime_extension(char *nom)
+// récupère le nom du fichier (malloc)
+char*	recupere_nom(char *nom)
 {
 	char	*dst;
 	int		len;
 	
-	len = strlen(nom) - 7;
-	if (len > 4)
-	{
-		int n = atoi(nom + len - 3);
-		if (n && n < 1000)
-			len -= 4;
-	}
+	len = strlen(nom);
 	dst = (char*)malloc((len + 1) * sizeof(char));
 	if (! dst)
 		erreur(ERR_MALLOC, 1);
 	strncpy(dst, nom, len);
 	dst[len] = '\0';
-	printf("dst = %s\n", dst);
 	return dst;
 }
 
@@ -48,8 +41,7 @@ SUDOKU	lire_fichier(char *nom)
 		erreur(ERR_EXTENSION, 1);
 	S = sudoku_malloc();
 	S.numero = recupere_numero(nom);
-	printf("n = %d\n", S.numero);
-	S.nom = supprime_extension(nom);
+	S.nom = recupere_nom(nom);
 	F = fopen(nom, "r");
 	if (! F)
 		erreur(ERR_OUVERTURE, 1);
@@ -79,6 +71,27 @@ SUDOKU	lire_fichier(char *nom)
 	return S;
 }
 
+// supprime l'extension et éventuellement le numéro associé
+char*	supprime_extension(char *nom)
+{
+	char	*dst;
+	int		len;
+	
+	len = strlen(nom) - 7;
+	if (len > 4)
+	{
+		int n = atoi(nom + len - 3);
+		if (n && n < 1000)
+			len -= 4;
+	}
+	dst = (char*)malloc((len + 1) * sizeof(char));
+	if (! dst)
+		erreur(ERR_MALLOC, 1);
+	strncpy(dst, nom, len);
+	dst[len] = '\0';
+	return dst;
+}
+
 // création d'un nouveau nom de fichier
 char*	nouveau_nom(int numero, char *nom)
 {
@@ -103,7 +116,12 @@ SUDOKU	ecrire_fichier(SUDOKU S)
 		S.numero = 1;
 	else
 		S.numero++;
+	nom = supprime_extension(S.nom);
+	free(S.nom);
+	S.nom = nom;
 	nom = nouveau_nom(S.numero, S.nom);
+	free(S.nom);
+	S.nom = nom;
 	F = fopen(nom, "w");
 	if (! F)
 		erreur(ERR_OUVERTURE, 1);
@@ -125,6 +143,5 @@ SUDOKU	ecrire_fichier(SUDOKU S)
 	}
 	fclose(F);
 	printf("information: Grille sauvegardée dans le fichier %s\n", nom);
-	free(nom);
 	return S;
 }

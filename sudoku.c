@@ -20,7 +20,10 @@ SUDOKU	jouer(SUDOKU S)
 	else if (k == 'S') // Sauve
 		S = ecrire_fichier(S);
 	else if (k == 'Q') // Quitte
+	{
+		sudoku_free(S);
 		exit(EXIT_SUCCESS);
+	}
 	return S;
 }
 
@@ -35,9 +38,10 @@ int		main(int argc, char **argv)
 	while (1)
 	{
 		sudoku_afficher(S);
+		if (sudoku_est_termine(S))
+			sudoku_affiche_gagne();
 		affiche_all();
 		S = jouer(S);
 	}
-	sudoku_afficher(S);
-	terminer_fenetre_graphique();
+	exit(EXIT_SUCCESS);
 }
