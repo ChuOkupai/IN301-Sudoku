@@ -26,8 +26,8 @@
 #define LARGEUR_TRAIT2 (LARGEUR_TRAIT/2)   // La largeur des traits secondaires
 
 // Les différentes couleurs
-#define COUL_TITRE    0x7D75FF // Couleur du titre
-#define COUL_GAGNE    0x83f442 // Couleur du "GAGNÉ"
+#define COUL_TITRE    0x4F7EFF // Couleur du titre
+#define COUL_GAGNE    0x00D700 // Couleur du "GAGNÉ"
 #define COUL_FOND     0xFFE2BB // Couleur de fond d'une case
 #define COUL_FOND_PB  0xD41C00 // Couleur de fond d'un case qui ne peut plus prendre aucune valeur
 #define COUL_TRAIT    0x000000 // Couleur des traits de séparation
