@@ -6,6 +6,7 @@ typedef struct action ACTION;
 struct action
 {
 	int    n;           // L'ancienne valeur
+	int    etat;        // L'ancien état de la case
 	int    l;           // Indice ligne où est stocké la valeur type dans le tableau
 	int    c;           // Indice colonne où est stocké la valeur type dans le tableau
 	ACTION *precedente; // Pointeur vers l'action précédente
@@ -37,7 +38,7 @@ void	erreur(int code, int critique);
 SUDOKU	sudoku_malloc();
 
 // Vérifie si n est déjà présent autour de la case
-int		sudoku_n_valide(int **val, int l, int c, int n);
+int		sudoku_n_valide(SUDOKU S, int l, int c, int n);
 
 // Modifie une case si possible
 SUDOKU	sudoku_modifier_case(SUDOKU S, int i, int j);

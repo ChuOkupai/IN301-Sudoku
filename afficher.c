@@ -8,6 +8,12 @@ void	initialiser_fenetre_graphique()
 	affiche_auto_off();
 }
 
+void	terminer_fenetre_graphique()
+{
+	wait_escape();
+	exit(EXIT_SUCCESS);
+}
+
 void	sudoku_afficher_grille()
 {
 	POINT	PX1, PX2, PY1, PY2;
@@ -82,7 +88,7 @@ void	sudoku_afficher(SUDOKU S)
 			{
 				v = 0;
 				for (int n = 1; n < 10; n++)
-					v += sudoku_n_valide(S.val, i, j, n);
+					v += sudoku_n_valide(S, i, j, n);
 				if (! v)
 					sudoku_afficher_pb(i, j);
 			}

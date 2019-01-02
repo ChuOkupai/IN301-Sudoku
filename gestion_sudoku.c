@@ -63,7 +63,7 @@ SUDOKU	sudoku_malloc()
 	return S;
 }
 
-SUDOKU	sudoku_ajoute_action(SUDOKU S, int n, int l, int c)
+SUDOKU	sudoku_ajoute_action(SUDOKU S, int n, int etat, int l, int c)
 {
 	ACTION *A;
 	
@@ -71,6 +71,7 @@ SUDOKU	sudoku_ajoute_action(SUDOKU S, int n, int l, int c)
 	if (! A)
 		erreur(ERR_MALLOC, 1);
 	A->n = n;
+	A->etat = etat;
 	A->l = l;
 	A->c = c;
 	A->precedente = S.P->derniere;
@@ -110,18 +111,18 @@ SUDOKU	sudoku_supprime_action(SUDOKU S)
 	return S;
 }
 
-int		sudoku_n_valide(int **val, int l, int c, int n)
+int		sudoku_n_valide(SUDOKU S, int l, int c, int n)
 {
 	if (! n)
 		return 1;
 	int i;
 	
 	for (i = 0; i < 9; i++)
-		if (val[i][c] == n || val[l][i] == n)
+		if (S.val[i][c] == n || S.val[l][i] == n)
 			return 0;
 	for (i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
-			if (val[l - l % 3 + i][c - c % 3 + j] == n)
+			if (S.val[l - l % 3 + i][c - c % 3 + j] == n)
 				return 0;
 	return 1;
 }
@@ -130,24 +131,21 @@ SUDOKU	sudoku_modifier_case(SUDOKU S, int i, int j)
 {
 	if (S.etat[i][j] == DEPART)
 		return S;
-	if (S.val[i][j] == 9)
-		S.val[i][j] = 0;
-	else
-		for (int n = S.val[i][j] + 1; n < 10; n++)
+	for (int n = S.val[i][j] + 1; n < 11; n++)
+		if (n == 10)
 		{
-			if (sudoku_n_valide(S.val, i, j, n))
-			{
-				S = sudoku_ajoute_action(S, S.val[i][j], i, j);
-				S.val[i][j] = n;
-				S.etat[i][j] = TRAVAIL;
+			if (! S.val[i][j])
 				break;
-			}
-			else if (n == 9)
-			{
-				S = sudoku_ajoute_action(S, S.val[i][j], i, j);
-				S.val[i][j] = 0;
-				S.etat[i][j] = TRAVAIL;
-}
+			S = sudoku_ajoute_action(S, S.val[i][j], S.etat[i][j], i, j);
+			S.val[i][j] = 0;
+			S.etat[i][j] = TRAVAIL;
+		}
+		else if (sudoku_n_valide(S, i, j, n))
+		{
+			S = sudoku_ajoute_action(S, S.val[i][j], S.etat[i][j], i, j);
+			S.val[i][j] = n;
+			S.etat[i][j] = TRAVAIL;
+			break;
 		}
 	return S;
 }
@@ -157,6 +155,7 @@ SUDOKU	sudoku_annule(SUDOKU S)
 	if (! S.P->max)
 		return S;
 	S.val[S.P->derniere->l][S.P->derniere->c] = S.P->derniere->n;
+	S.etat[S.P->derniere->l][S.P->derniere->c] = S.P->derniere->etat;
 	return sudoku_supprime_action(S);
 }
 
@@ -174,7 +173,7 @@ int		sudoku_resolution(SUDOKU S, int n)
 		return sudoku_resolution(S, n + 1);
 	for (int k = 1; k < 10; k++)
 	{
-		if (! sudoku_n_valide(S.val, i, j, k))
+		if (! sudoku_n_valide(S, i, j, k))
 			continue;
 		S.val[i][j] = k;
 		S.etat[i][j] = SOLUTION;
@@ -186,10 +185,20 @@ int		sudoku_resolution(SUDOKU S, int n)
 	return 0;
 }
 
+/* Vide la pile d'actions */
+SUDOKU	sudoku_vide_pile(SUDOKU S)
+{
+	while (S.P->max)
+		S = sudoku_supprime_action(S);
+	return S;
+}
+
 SUDOKU	sudoku_trouve(SUDOKU S)
 {
 	if (! sudoku_resolution(S, 0))
 		erreur(ERR_SOLUTION, 0);
+	else
+		sudoku_vide_pile(S);
 	return S;
 }
 
@@ -212,7 +221,6 @@ void	sudoku_free(SUDOKU S)
 	free(S.val);
 	free(S.etat);
 	free(S.nom);
-	while (S.P->max)
-		S = sudoku_supprime_action(S);
+	sudoku_vide_pile(S);
 	free(S.P);
 }
