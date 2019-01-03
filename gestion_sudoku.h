@@ -1,22 +1,9 @@
 #ifndef __SUDOKU_H
 #define __SUDOKU_H
 
-// Stocke une action (clic sur une case ou appuie sur V)
-typedef struct action ACTION;
-struct action
-{
-	int    n;           // L'ancienne valeur
-	int    etat;        // L'ancien état de la case
-	int    l;           // Indice ligne où est stocké la valeur type dans le tableau
-	int    c;           // Indice colonne où est stocké la valeur type dans le tableau
-	ACTION *precedente; // Pointeur vers l'action précédente
-};
-
-typedef struct pile
-{
-	ACTION *derniere; // Pointeur vers la dernière action
-	int    max;       // Nombre d'actions actuellement stockées
-}	PILE;
+// Pile des clics précédents
+typedef struct pile PILE;
+struct pile;
 
 typedef struct sudoku
 {

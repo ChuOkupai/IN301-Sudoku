@@ -3,6 +3,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Stocke une action (clic sur une case ou appuie sur V)
+typedef struct action ACTION;
+struct action
+{
+	int    n;           // L'ancienne valeur
+	int    etat;        // L'ancien état de la case
+	int    l;           // Indice ligne où est stocké la valeur type dans le tableau
+	int    c;           // Indice colonne où est stocké la valeur type dans le tableau
+	ACTION *precedente; // Pointeur vers l'action précédente
+};
+
+struct pile
+{
+	ACTION *derniere; // Pointeur vers la dernière action
+	int    max;       // Nombre d'actions actuellement stockées
+};
+
 void	erreur(int code, int critique)
 {
 	printf("erreur: ");
@@ -199,9 +216,7 @@ int		sudoku_est_termine(SUDOKU S)
 	int n;
 	
 	for (int i = 0; i < 9; i++)
-	{
 		for (int j = 0; j < 9; j++)
-		{
 			if (! S.val[i][j])
 				return 0;
 			else
@@ -215,8 +230,6 @@ int		sudoku_est_termine(SUDOKU S)
 				}
 				S.val[i][j] = n;
 			}
-		}
-	}
 	return 1;
 }
 

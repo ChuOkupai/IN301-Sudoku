@@ -123,4 +123,5 @@ void	sudoku_affiche_gagne()
 	P1.x = TAILLE_CASE / 8;
 	P1.y = HAUTEUR - P1.x;
 	aff_pol(buf, TAILLE_POLICE, P1, COUL_GAGNE);
+	printf("information: Grille terminée ! Appuyez sur S pour sauvegarder ou Q pour quitter\n");
 }
