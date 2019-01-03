@@ -4,7 +4,7 @@
 
 \title{\textbf{IN301 - Projet Sudoku}}
 \author{SOURSOU Adrien}
-\date{\oldstylenums{03}/\oldstylenums{01}/\oldstylenums{2019}}
+\date{\oldstylenums{04}/\oldstylenums{01}/\oldstylenums{2019}}
 
 \renewcommand*\contentsname{Sommaire}
 
@@ -28,12 +28,12 @@ Il reste donc sensiblement le même.
 Dans un premier temps, j'ai réalisé un affichage pour la grille de Sudoku. \\
 Quelques légères modifications ont été faites sur les couleurs. \\
 Puis, j'ai crée la structure SUDOKU pour stocker les différentes données. \\
-Dans cette grille se trouve une pile, implémentée sous forme de liste chaînée, qui permet de garder en mémoire les clics de l'utilisateur. \\
+Dans cette structure se trouve une pile, implémentée sous forme de liste chaînée, qui permet de garder en mémoire les clics de l'utilisateur. \\
 En ce qui concerne l'algorithme de résolution, j'ai déjà eu l'occasion d'en programmer un par le passé, donc il ne me restait plus qu'à l'intégrer au projet. \\
 Le fichier constantes.h permet de modifier divers paramètres dont la taille de la pile.
 
 \subsection{Méthode de résolution}
-L'algorithme de résolution utilise le principe du backtracking, il parcourt chaque case une à une en testant chaque chiffre si la case est vide. Comme l'algorithme est récursif, il peut en quelque sorte revenir en arrière si il n'a pas trouvé la solution afin tester une autre possibilité.
+L'algorithme de résolution utilise le principe du backtracking, il parcourt chaque case une à une en testant chaque chiffre si la case est vide. Comme l'algorithme est récursif, il peut en quelque sorte revenir en arrière si il n'a pas trouvé la solution afin tester une autre possibilité jusqu'à, si c'est possible, résoudre la grille.
 
 \subsection{Gestion d'erreurs}
 Il existe une fonction erreur qui permet d'afficher une erreur sur la sortie standard. Dans certains cas, l'exécution du programme est stoppée, par exemple si la mémoire n'a pas été assignée correctement.
