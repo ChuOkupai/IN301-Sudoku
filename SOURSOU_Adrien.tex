@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{minted}
+
+\title{\textbf{IN301 - Projet Sudoku}}
+\author{SOURSOU Adrien}
+\date{\oldstylenums{03}/\oldstylenums{01}/\oldstylenums{2019}}
+
+\renewcommand*\contentsname{Sommaire}
+
+\begin{document}
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Organisation du projet}
+
+\subsection{Outils}
+J'ai utilisé GitHub pour gérer le projet, Geany ainsi que Vim comme éditeur et Valgrind comme debugger.
+
+\subsection{Découpage}
+Le découpage se base sur les ressources disponibles sur e-campus. \\
+Il reste donc sensiblement le même.
+
+\subsection{Déroulement}
+Dans un premier temps, j'ai réalisé un affichage pour la grille de Sudoku. \\
+Quelques légères modifications ont été faites sur les couleurs. \\
+Puis, j'ai crée la structure SUDOKU pour stocker les différentes données. \\
+Dans cette grille se trouve une pile, implémentée sous forme de liste chaînée, qui permet de garder en mémoire les clics de l'utilisateur. \\
+En ce qui concerne l'algorithme de résolution, j'ai déjà eu l'occasion d'en programmer un par le passé, donc il ne me restait plus qu'à l'intégrer au projet. \\
+Le fichier constantes.h permet de modifier divers paramètres dont la taille de la pile.
+
+\subsection{Méthode de résolution}
+L'algorithme de résolution utilise le principe du backtracking, il parcourt chaque case une à une en testant chaque chiffre si la case est vide. Comme l'algorithme est récursif, il peut en quelque sorte revenir en arrière si il n'a pas trouvé la solution afin tester une autre possibilité.
+
+\subsection{Gestion d'erreurs}
+Il existe une fonction erreur qui permet d'afficher une erreur sur la sortie standard. Dans certains cas, l'exécution du programme est stoppée, par exemple si la mémoire n'a pas été assignée correctement.
+
+\subsection{Note additionnelle}
+Toutes les allocations mémoires sont correctement libérées, il y a cependant une fuite mémoire venant de l'uvsqgraphics que je ne peux pas corriger.
+
+\newpage
+\section{Manuel d'utilisation}
+
+\subsection{Compilation}
+Le projet se compile avec la commande :
+\begin{minted}{bash}
+make sudoku
+\end{minted}
+
+\subsection{Lancement}
+Le programme se lance avec la commande :
+\begin{minted}{bash}
+./sudoku [FILE]
+\end{minted}
+[FILE] est le fichier contenant la grille de sudoku. \\
+Remarque : Le fichier doit se terminer par ".sudoku"
+
+\subsection{Contrôles}
+\begin{itemize}
+\item \textbf{U} : Annule le dernier changement de case valide de l'utilisateur
+\item \textbf{V} : Résout la grille de Sudoku
+\item \textbf{S} : Sauvegarde la grille de Sudoku dans un fichier
+\item \textbf{Q} : Quitte le programme
+\end{itemize}
+
+\subsection{Comportement du programme}
+Si aucun fichier n'est en paramètre, le programme retournera une erreur. \\
+De même si le fichier n'a pas pu être ouvert, où si le format n'est pas le bon. \\
+Tant que la grille n'est pas résolue, l'utilisateur peut modifier les cases. \\
+Si le programme détecte que la grille est finie, il affiche "GAGNÉ" et attend que l'utilisateur sauvegarde ou quitte le programme.
+
+\end{document}
