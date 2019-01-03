@@ -8,10 +8,10 @@ struct pile;
 typedef struct sudoku
 {
 	/** Stockage du sudoku **/
-	int  **val;     // Stocke les valeurs
-	int  **etat;    // La case vaut soit DEPART, soit TRAVAIL, soit SOLUTION
-	int  numero;    // Numéro de la sauvegarde actuelle
-	char *nom;      // Nom du fichier sans extension
+	int  **val;  // Stocke les valeurs
+	int  **etat; // La case vaut soit DEPART, soit TRAVAIL, soit SOLUTION
+	int  numero; // Numéro de la sauvegarde actuelle
+	char *nom;   // Nom du fichier sans extension
 	
 	/** Stockage des actions précédentes **/
 	PILE *P; // Pile des anciennes actions
@@ -25,6 +25,7 @@ void	erreur(int code);
 SUDOKU	sudoku_malloc();
 
 // Vérifie si n est déjà présent autour de la case
+/** Renvoie 1 si n valide, 0 sinon **/
 int		sudoku_n_valide(SUDOKU S, int l, int c, int n);
 
 // Modifie une case si possible
