@@ -8,12 +8,6 @@ void	initialiser_fenetre_graphique()
 	affiche_auto_off();
 }
 
-void	terminer_fenetre_graphique()
-{
-	wait_escape();
-	exit(EXIT_SUCCESS);
-}
-
 void	sudoku_afficher_grille()
 {
 	POINT	PX1, PX2, PY1, PY2;

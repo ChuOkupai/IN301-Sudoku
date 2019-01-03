@@ -29,7 +29,7 @@ SUDOKU	jouer(SUDOKU S)
 int		main(int argc, char **argv)
 {
 	if (argc < 2)
-		erreur(ERR_ARGC, 1);
+		erreur(ERR_ARGC);
 	SUDOKU S;
 	
 	S = lire_fichier(argv[1]);

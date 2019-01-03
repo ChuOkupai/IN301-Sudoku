@@ -20,7 +20,7 @@ struct pile
 	int    max;       // Nombre d'actions actuellement stockées
 };
 
-void	erreur(int code, int critique)
+void	erreur(int code)
 {
 	printf("erreur: ");
 	switch (code)
@@ -44,7 +44,7 @@ void	erreur(int code, int critique)
 			puts("Solution impossible");
 			break;
 	}
-	if (critique)
+	if (code != ERR_SOLUTION)
 		exit(EXIT_FAILURE);
 }
 
@@ -55,12 +55,12 @@ int**	tab_malloc()
 	
 	t = (int**)malloc(9 * sizeof(int*));
 	if (! t)
-		erreur(ERR_MALLOC, 1);
+		erreur(ERR_MALLOC);
 	for (int i = 0; i < 9; i++)
 	{
 		t[i] = (int*)malloc(9 * sizeof(int));
 		if (! t[i])
-			erreur(ERR_MALLOC, 1);
+			erreur(ERR_MALLOC);
 	}
 	return t;
 }
@@ -74,7 +74,7 @@ SUDOKU	sudoku_malloc()
 	S.nom = NULL;
 	S.P = (PILE*)malloc(sizeof(PILE));
 	if (! S.P)
-		erreur(ERR_MALLOC, 1);
+		erreur(ERR_MALLOC);
 	S.P->derniere = NULL;
 	S.P->max = 0;
 	return S;
@@ -86,7 +86,7 @@ SUDOKU	sudoku_ajoute_action(SUDOKU S, int n, int etat, int l, int c)
 	
 	A = (ACTION*)malloc(sizeof(ACTION));
 	if (! A)
-		erreur(ERR_MALLOC, 1);
+		erreur(ERR_MALLOC);
 	A->n = n;
 	A->etat = etat;
 	A->l = l;
@@ -205,9 +205,9 @@ int		sudoku_resolution(SUDOKU S, int n)
 SUDOKU	sudoku_trouve(SUDOKU S)
 {
 	if (! sudoku_resolution(S, 0))
-		erreur(ERR_SOLUTION, 0);
+		erreur(ERR_SOLUTION);
 	else if (! sudoku_est_termine(S))
-		erreur(ERR_SOLUTION, 0);
+		erreur(ERR_SOLUTION);
 	return S;
 }
 

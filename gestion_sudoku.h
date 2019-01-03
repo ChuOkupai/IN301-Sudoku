@@ -18,8 +18,8 @@ typedef struct sudoku
 }	SUDOKU;
 
 // Affiche une erreur sur la sortie standard
-/** Si critique != 0, termine le programme **/
-void	erreur(int code, int critique);
+/** Si l'erreur est critique, termine le programme **/
+void	erreur(int code);
 
 // Alloue la mémoire à un sudoku
 SUDOKU	sudoku_malloc();
