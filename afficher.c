@@ -112,10 +112,15 @@ void	sudoku_afficher(SUDOKU S)
 
 void	sudoku_affiche_gagne()
 {
-	POINT	P;
+	POINT	P1, P2;
 	char	*buf = "GAGN" Eacute;
 	
-	P.x = 6.5 * TAILLE_CASE;
-	P.y = HAUTEUR - TAILLE_CASE / 8;
-	aff_pol(buf, TAILLE_POLICE, P, COUL_GAGNE);
+	P1.x = 0;
+	P1.y = HAUTEUR - TAILLE_CASE;
+	P2.x = LARGEUR;
+	P2.y = HAUTEUR;
+	draw_fill_rectangle(P1, P2, COUL_FOND);
+	P1.x = TAILLE_CASE / 8;
+	P1.y = HAUTEUR - P1.x;
+	aff_pol(buf, TAILLE_POLICE, P1, COUL_GAGNE);
 }

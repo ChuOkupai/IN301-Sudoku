@@ -9,21 +9,29 @@ SUDOKU	jouer(SUDOKU S)
 	POINT	P = { -1, -1 };
 	char	k = 0;
 	int		a = 0; // Pour passer une adresse en paramètre (puisque la fonction ne gère pas les pointeurs NULL)
+	int		termine;
 	
+	termine = sudoku_est_termine(S);
 	wait_key_arrow_clic(&k, &a, &P);
-	if (P.x != -1 && P.y != -1 && P.y <= LARGEUR) // Clic dans une case
-		S = sudoku_modifier_case(S, (8 - P.y / TAILLE_CASE), P.x / TAILLE_CASE);
-	else if (k == 'U')  // Undo
-		S = sudoku_annule(S);
-	else if (k == 'V') // Trouve
-		S = sudoku_trouve(S);
-	else if (k == 'S') // Sauve
-		S = ecrire_fichier(S);
-	else if (k == 'Q') // Quitte
+	if (! termine)
 	{
-		sudoku_free(S);
-		exit(EXIT_SUCCESS);
+		if (P.x != -1 && P.y != -1 && P.y <= LARGEUR) // Clic dans une case
+			S = sudoku_modifier_case(S, (8 - P.y / TAILLE_CASE), P.x / TAILLE_CASE);
+		else if (k == 'U')  // Undo
+			S = sudoku_annule(S);
+		else if (k == 'V') // Trouve
+			S = sudoku_trouve(S);
 	}
+	else if (k != 'S' && k != 'Q')
+		return jouer(S);
+	if (k == 'S') // Sauve
+	{
+		S = ecrire_fichier(S);
+		if (termine)
+			return jouer(S);
+	}
+	else if (k == 'Q') // Quitte
+		sudoku_quitte(S);
 	return S;
 }
 
@@ -39,7 +47,10 @@ int		main(int argc, char **argv)
 	{
 		sudoku_afficher(S);
 		if (sudoku_est_termine(S))
+		{
 			sudoku_affiche_gagne();
+			printf("information: Grille terminée ! Appuyez sur S pour sauvegarder ou Q pour quitter\n");
+		}
 		affiche_all();
 		S = jouer(S);
 	}

@@ -35,5 +35,5 @@ zip:
 	cp Makefile $(NOM)
 	cp *.h *.c $(NOM)
 	cp A_LIRE.txt $(NOM)
-	zip -r $(NOM).zip $(NOM)
+	zip -r $(NOM).zip $(NOM) $(NOM).pdf
 	rm -rf $(NOM)

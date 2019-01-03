@@ -118,7 +118,7 @@ int		sudoku_n_valide(SUDOKU S, int l, int c, int n)
 	int i;
 	
 	for (i = 0; i < 9; i++)
-		if (S.val[i][c] == n || S.val[l][i] == n)
+		if (S.val[l][i] == n || S.val[i][c] == n)
 			return 0;
 	for (i = 0; i < 3; i++)
 		for (int j = 0; j < 3; j++)
@@ -185,6 +185,41 @@ int		sudoku_resolution(SUDOKU S, int n)
 	return 0;
 }
 
+SUDOKU	sudoku_trouve(SUDOKU S)
+{
+	if (! sudoku_resolution(S, 0))
+		erreur(ERR_SOLUTION, 0);
+	else if (! sudoku_est_termine(S))
+		erreur(ERR_SOLUTION, 0);
+	return S;
+}
+
+int		sudoku_est_termine(SUDOKU S)
+{
+	int n;
+	
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			if (! S.val[i][j])
+				return 0;
+			else
+			{
+				n = S.val[i][j];
+				S.val[i][j] = 0;
+				if (! sudoku_n_valide(S, i, j, n))
+				{
+					S.val[i][j] = n;
+					return 0;
+				}
+				S.val[i][j] = n;
+			}
+		}
+	}
+	return 1;
+}
+
 /* Vide la pile d'actions */
 SUDOKU	sudoku_vide_pile(SUDOKU S)
 {
@@ -193,25 +228,7 @@ SUDOKU	sudoku_vide_pile(SUDOKU S)
 	return S;
 }
 
-SUDOKU	sudoku_trouve(SUDOKU S)
-{
-	if (! sudoku_resolution(S, 0))
-		erreur(ERR_SOLUTION, 0);
-	else
-		sudoku_vide_pile(S);
-	return S;
-}
-
-int		sudoku_est_termine(SUDOKU S)
-{
-	for (int i = 0; i < 9; i++)
-		for (int j = 0; j < 9; j++)
-			if (! S.val[i][j])
-				return 0;
-	return 1;
-}
-
-void	sudoku_free(SUDOKU S)
+void	sudoku_quitte(SUDOKU S)
 {
 	for (int i = 0; i < 9; i++)
 	{
@@ -223,4 +240,5 @@ void	sudoku_free(SUDOKU S)
 	free(S.nom);
 	sudoku_vide_pile(S);
 	free(S.P);
+	exit(EXIT_SUCCESS);
 }

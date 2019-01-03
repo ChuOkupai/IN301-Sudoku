@@ -53,7 +53,7 @@ SUDOKU	sudoku_trouve(SUDOKU S);
 /** Renvoie 1 si vrai, 0 sinon **/
 int		sudoku_est_termine(SUDOKU S);
 
-// Libération de la mémoire
-void	sudoku_free(SUDOKU S);
+// Libére la mémoire et quitte le programme
+void	sudoku_quitte(SUDOKU S);
 
 #endif /* gestion_sudoku.h */
